@@ -1,0 +1,306 @@
+{
+  "version": 3,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 15,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "default",
+      "displayName": "Default Config",
+      "description": "Default build using Ninja generator",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/default",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "BUILD_TESTS": "ON",
+        "BUILD_EXAMPLES": "ON"
+      }
+    },
+    {
+      "name": "debug",
+      "displayName": "Debug",
+      "description": "Debug build with tests enabled",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "BUILD_TESTS": "ON",
+        "BUILD_EXAMPLES": "ON",
+        "CMAKE_CXX_FLAGS": "-Wall -Wextra -g"
+      }
+    },
+    {
+      "name": "release",
+      "displayName": "Release",
+      "description": "Release build with optimizations",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/release",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "BUILD_TESTS": "ON",
+        "BUILD_EXAMPLES": "ON",
+        "CMAKE_CXX_FLAGS": "-O3 -DNDEBUG"
+      }
+    },
+    {
+      "name": "msvc-debug",
+      "displayName": "Visual Studio Debug",
+      "description": "Debug build using Visual Studio generator",
+      "generator": "Visual Studio 17 2022",
+      "architecture": "x64",
+      "binaryDir": "${sourceDir}/build/msvc-debug",
+      "cacheVariables": {
+        "BUILD_TESTS": "ON",
+        "BUILD_EXAMPLES": "ON"
+      }
+    },
+    {
+      "name": "msvc-release",
+      "displayName": "Visual Studio Release",
+      "description": "Release build using Visual Studio generator",
+      "generator": "Visual Studio 17 2022",
+      "architecture": "x64",
+      "binaryDir": "${sourceDir}/build/msvc-release",
+      "cacheVariables": {
+        "BUILD_TESTS": "ON",
+        "BUILD_EXAMPLES": "ON"
+      }
+    },
+    {
+      "name": "tests-only",
+      "displayName": "Tests Only",
+      "description": "Build configuration with only tests (no examples)",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/tests-only",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "BUILD_TESTS": "ON",
+        "BUILD_EXAMPLES": "OFF"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "default",
+      "displayName": "Default Build",
+      "configurePreset": "default",
+      "targets": ["all"]
+    },
+    {
+      "name": "debug",
+      "displayName": "Debug Build",
+      "configurePreset": "debug"
+    },
+    {
+      "name": "release",
+      "displayName": "Release Build",
+      "configurePreset": "release"
+    },
+    {
+      "name": "tests",
+      "displayName": "Build All Tests",
+      "configurePreset": "default",
+      "targets": [
+        "test_vnode",
+        "test_props",
+        "test_component",
+        "test_fiber",
+        "test_reconciler",
+        "test_hook_rules",
+        "test_useState",
+        "test_useEffect",
+        "test_useRef",
+        "test_useMemo",
+        "test_useCallback",
+        "test_useReducer",
+        "test_context",
+        "test_synthetic_events",
+        "test_event_dispatcher",
+        "test_event_manager",
+        "test_scheduler",
+        "test_layout",
+        "test_style_resolver",
+        "test_render_tree"
+      ]
+    },
+    {
+      "name": "core-tests",
+      "displayName": "Build Core Tests Only",
+      "configurePreset": "default",
+      "targets": [
+        "test_vnode",
+        "test_props",
+        "test_component",
+        "test_fiber",
+        "test_reconciler"
+      ]
+    },
+    {
+      "name": "hooks-tests",
+      "displayName": "Build Hooks Tests Only",
+      "configurePreset": "default",
+      "targets": [
+        "test_hook_rules",
+        "test_useState",
+        "test_useEffect",
+        "test_useRef",
+        "test_useMemo",
+        "test_useCallback",
+        "test_useReducer"
+      ]
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "all",
+      "displayName": "Run All Tests",
+      "description": "Run all test suites",
+      "configurePreset": "default",
+      "output": {
+        "outputOnFailure": true,
+        "verbosity": "verbose"
+      },
+      "execution": {
+        "noTestsAction": "error",
+        "stopOnFailure": false
+      }
+    },
+    {
+      "name": "core",
+      "displayName": "Run Core Tests",
+      "description": "Run core component tests (VNode, Props, Component, Fiber, Reconciler)",
+      "configurePreset": "default",
+      "filter": {
+        "include": {
+          "nameRegex": "^(VNode|Props|Component|Fiber|Reconciler).*"
+        }
+      },
+      "output": {
+        "outputOnFailure": true,
+        "verbosity": "verbose"
+      }
+    },
+    {
+      "name": "hooks",
+      "displayName": "Run Hooks Tests",
+      "description": "Run all hooks-related tests",
+      "configurePreset": "default",
+      "filter": {
+        "include": {
+          "nameRegex": "^(Hook|UseState|UseEffect|UseRef|UseMemo|UseCallback|UseReducer).*"
+        }
+      },
+      "output": {
+        "outputOnFailure": true,
+        "verbosity": "verbose"
+      }
+    },
+    {
+      "name": "context",
+      "displayName": "Run Context Tests",
+      "description": "Run context API tests",
+      "configurePreset": "default",
+      "filter": {
+        "include": {
+          "nameRegex": "^Context.*"
+        }
+      },
+      "output": {
+        "outputOnFailure": true,
+        "verbosity": "verbose"
+      }
+    },
+    {
+      "name": "events",
+      "displayName": "Run Events Tests",
+      "description": "Run event system tests",
+      "configurePreset": "default",
+      "filter": {
+        "include": {
+          "nameRegex": "^(SyntheticEvent|EventDispatcher|EventManager).*"
+        }
+      },
+      "output": {
+        "outputOnFailure": true,
+        "verbosity": "verbose"
+      }
+    },
+    {
+      "name": "scheduler",
+      "displayName": "Run Scheduler Tests",
+      "description": "Run scheduler tests",
+      "configurePreset": "default",
+      "filter": {
+        "include": {
+          "nameRegex": "^(UpdateScheduler|WorkLoop).*"
+        }
+      },
+      "output": {
+        "outputOnFailure": true,
+        "verbosity": "verbose"
+      }
+    },
+    {
+      "name": "renderer",
+      "displayName": "Run Renderer Tests",
+      "description": "Run renderer tests",
+      "configurePreset": "default",
+      "filter": {
+        "include": {
+          "nameRegex": "^(Layout|Style|RenderTree).*"
+        }
+      },
+      "output": {
+        "outputOnFailure": true,
+        "verbosity": "verbose"
+      }
+    },
+    {
+      "name": "quick",
+      "displayName": "Quick Tests",
+      "description": "Run only core tests for quick feedback",
+      "configurePreset": "default",
+      "filter": {
+        "include": {
+          "nameRegex": "^(VNode|Props|Component).*"
+        }
+      },
+      "output": {
+        "outputOnFailure": true
+      }
+    },
+    {
+      "name": "verbose",
+      "displayName": "All Tests (Verbose)",
+      "description": "Run all tests with maximum verbosity",
+      "configurePreset": "default",
+      "output": {
+        "outputOnFailure": true,
+        "verbosity": "extra"
+      },
+      "execution": {
+        "noTestsAction": "error",
+        "stopOnFailure": false,
+        "jobs": 1
+      }
+    },
+    {
+      "name": "parallel",
+      "displayName": "All Tests (Parallel)",
+      "description": "Run all tests in parallel for faster execution",
+      "configurePreset": "default",
+      "output": {
+        "outputOnFailure": true,
+        "verbosity": "normal"
+      },
+      "execution": {
+        "noTestsAction": "error",
+        "stopOnFailure": false,
+        "jobs": 0
+      }
+    }
+  ]
+}
+

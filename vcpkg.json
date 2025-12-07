@@ -1,0 +1,10 @@
+{
+  "name": "reactcpp",
+  "version": "1.0.0",
+  "description": "ReactCPP dependencies",
+  "dependencies": [
+    "sdl2",
+    "nlohmann-json"
+  ]
+}
+
