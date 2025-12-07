@@ -2,6 +2,7 @@
 #include "reactpp/core/Props.hpp"
 #include "reactpp/elements/Elements.hpp"
 #include <stdexcept>
+#include <iostream>
 #include <cmath>
 #include <algorithm>
 
@@ -642,6 +643,9 @@ void SDL2Renderer::renderVNode(VNode::Ptr node, int offsetX, int offsetY) {
             if (tag == "Button") {
                 Rect layout = getRectFromProps(node->getProps(), {offsetX, offsetY, 150, 40});
                 
+                // Store layout for hit testing
+                elementLayouts_[node->getId()] = layout;
+                
                 // Button styling
                 uint32_t bgColor = getColorFromProps(node->getProps(), "backgroundColor", 0x4A90E2FF); // Blue
                 uint32_t borderColor = getColorFromProps(node->getProps(), "borderColor", 0x357ABDFF); // Darker blue
@@ -693,6 +697,17 @@ void SDL2Renderer::renderVNode(VNode::Ptr node, int offsetX, int offsetY) {
                                     fontSize = node->getProps().get<int>("fontSize");
                                 } catch (...) {}
                             }
+                            
+                            // Calculate text bounds for hit testing
+                            int textW, textH;
+                            getTextSize(text, fontSize, textW, textH);
+                            Rect textLayout = {offsetX, offsetY, textW, textH};
+                            
+                            // Store layout if element has onClick handler
+                            if (node->getProps().has("onClick")) {
+                                elementLayouts_[node->getId()] = textLayout;
+                            }
+                            
                             drawText(offsetX, offsetY, text, textColor, fontSize);
                         }
                     } else if (child) {
@@ -707,6 +722,11 @@ void SDL2Renderer::renderVNode(VNode::Ptr node, int offsetX, int offsetY) {
             Rect layout = getRectFromProps(node->getProps(), {offsetX, offsetY, width_ - offsetX, height_ - offsetY});
             if (layout.width <= 0) layout.width = width_ - offsetX;
             if (layout.height <= 0) layout.height = height_ - offsetY;
+            
+            // Store layout for hit testing (if element has onClick or is interactive)
+            if (node->getProps().has("onClick") || tag == "Button" || tag == "View") {
+                elementLayouts_[node->getId()] = layout;
+            }
             
             // Get background color (default to transparent for View)
             uint32_t bgColor = 0x00000000; // Transparent by default
@@ -810,9 +830,121 @@ void SDL2Renderer::renderVNode(VNode::Ptr node, int offsetX, int offsetY) {
     }
 }
 
+void SDL2Renderer::clearLayoutCache() {
+    elementLayouts_.clear();
+}
+
 void SDL2Renderer::render(VNode::Ptr root) {
     if (!root) return;
+    clearLayoutCache(); // Clear previous layouts
     renderVNode(root, 0, 0);
+}
+
+VNode::Ptr SDL2Renderer::findElementAtRecursive(int x, int y, VNode::Ptr node) {
+    if (!node) return nullptr;
+    
+    // Check if this element contains the point
+    auto it = elementLayouts_.find(node->getId());
+    if (it != elementLayouts_.end()) {
+        const Rect& rect = it->second;
+        
+        if (x >= rect.x && x < rect.x + rect.width &&
+            y >= rect.y && y < rect.y + rect.height) {
+            
+            // Check children first (they're on top) - but only if they have layouts
+            VNode::Ptr bestChild = nullptr;
+            for (const auto& child : node->getChildren()) {
+                if (child) {
+                    auto found = findElementAtRecursive(x, y, child);
+                    if (found) {
+                        // Prefer interactive elements (Button or with onClick)
+                        if (found->getType() == VNodeType::Element) {
+                            const std::string& tag = found->getTag();
+                            if (tag == "Button" || found->getProps().has("onClick")) {
+                                return found;
+                            }
+                        }
+                        // Keep track of any found child
+                        if (!bestChild) bestChild = found;
+                    }
+                }
+            }
+            
+            // If we found a child, return it
+            if (bestChild) return bestChild;
+            
+            // If no child contains the point, return this element
+            // Only return if it has an onClick handler or is a Button
+            if (node->getType() == VNodeType::Element) {
+                const std::string& tag = node->getTag();
+                if (tag == "Button" || node->getProps().has("onClick")) {
+                    return node;
+                }
+            }
+        }
+    }
+    
+    return nullptr;
+}
+
+VNode::Ptr SDL2Renderer::findElementAt(int x, int y, VNode::Ptr root) {
+    if (!root) return nullptr;
+    return findElementAtRecursive(x, y, root);
+}
+
+bool SDL2Renderer::handleClick(int x, int y, VNode::Ptr root) {
+    VNode::Ptr clicked = findElementAt(x, y, root);
+    if (!clicked) {
+        return false;
+    }
+    
+    // Check if element has onClick handler
+    if (clicked->getType() == VNodeType::Element) {
+        const Props& props = clicked->getProps();
+        if (props.has("onClick")) {
+            try {
+                // Try to get as std::function<void()>
+                auto typeIndex = props.getType("onClick");
+                if (typeIndex && *typeIndex == std::type_index(typeid(std::function<void()>))) {
+                    auto onClick = props.get<std::function<void()>>("onClick");
+                    if (onClick) {
+                        onClick();
+                        return true;
+                    }
+                }
+            } catch (const std::exception& e) {
+                std::cerr << "Error calling onClick handler: " << e.what() << std::endl;
+            } catch (...) {
+                std::cerr << "Unknown error calling onClick handler" << std::endl;
+            }
+        }
+    }
+    
+    return false;
+}
+
+bool SDL2Renderer::handleTouch(int x, int y, VNode::Ptr root) {
+    // Touch events are handled the same as clicks
+    return handleClick(x, y, root);
+}
+
+void SDL2Renderer::processEvents(VNode::Ptr root) {
+    SDL_Event event;
+    while (pollEvent(event)) {
+        if (event.type == SDL_QUIT) {
+            // Quit event should be handled by the application
+            continue;
+        } else if (event.type == SDL_MOUSEBUTTONDOWN) {
+            if (event.button.button == SDL_BUTTON_LEFT) {
+                handleClick(event.button.x, event.button.y, root);
+            }
+        } else if (event.type == SDL_FINGERDOWN) {
+            // Convert touch coordinates to screen coordinates
+            int x = static_cast<int>(event.tfinger.x * width_);
+            int y = static_cast<int>(event.tfinger.y * height_);
+            handleTouch(x, y, root);
+        }
+    }
 }
 
 bool SDL2Renderer::pollEvent(SDL_Event& event) {

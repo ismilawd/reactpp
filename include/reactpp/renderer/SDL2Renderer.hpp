@@ -3,9 +3,11 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include "reactpp/core/VNode.hpp"
+#include "reactpp/core/Props.hpp"
 #include <string>
 #include <memory>
 #include <vector>
+#include <unordered_map>
 
 namespace reactpp {
 namespace renderer {
@@ -93,6 +95,15 @@ public:
     // Event handling
     bool pollEvent(SDL_Event& event);
     
+    // Click/touch event handling
+    VNode::Ptr findElementAt(int x, int y, VNode::Ptr root);
+    bool handleClick(int x, int y, VNode::Ptr root);
+    bool handleTouch(int x, int y, VNode::Ptr root);
+    void processEvents(VNode::Ptr root);
+    
+    // Clear element layout cache (call before re-rendering)
+    void clearLayoutCache();
+    
 private:
     SDL_Window* window_;
     SDL_Renderer* renderer_;
@@ -102,10 +113,14 @@ private:
     bool initialized_;
     bool ttfInitialized_;
     
+    // Element layout tracking for hit testing
+    std::unordered_map<uint64_t, Rect> elementLayouts_;
+    
     bool initializeSDL();
     void cleanup();
     TTF_Font* loadFont(const std::string& fontPath, int fontSize);
     void renderVNode(VNode::Ptr node, int offsetX = 0, int offsetY = 0);
+    VNode::Ptr findElementAtRecursive(int x, int y, VNode::Ptr node);
     uint32_t getColorFromProps(const Props& props, const std::string& key, uint32_t defaultColor = 0xFFFFFFFF);
     Rect getRectFromProps(const Props& props, const Rect& defaultRect);
 };
