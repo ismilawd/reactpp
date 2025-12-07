@@ -156,19 +156,25 @@ int main(int argc, char* argv[]) {
                 while (sdlRenderer->pollEvent(event)) {
                     if (event.type == SDL_QUIT) {
                         running = false;
-                    } else if (event.type == SDL_MOUSEBUTTONDOWN || event.type == SDL_FINGERDOWN) {
-                        bool handled = false;
-                        if (event.type == SDL_MOUSEBUTTONDOWN) {
-                            handled = sdlRenderer->handleClick(event.button.x, event.button.y, currentVNode);
-                        } else if (event.type == SDL_FINGERDOWN) {
-                            int x = static_cast<int>(event.tfinger.x * sdlRenderer->getWidth());
-                            int y = static_cast<int>(event.tfinger.y * sdlRenderer->getHeight());
-                            handled = sdlRenderer->handleTouch(x, y, currentVNode);
-                        }
-                        
+                    } else if (event.type == SDL_FINGERDOWN) {
+                        // Handle touch events
+                        int x = static_cast<int>(event.tfinger.x * sdlRenderer->getWidth());
+                        int y = static_cast<int>(event.tfinger.y * sdlRenderer->getHeight());
+                        bool handled = sdlRenderer->handleTouch(x, y, currentVNode);
                         if (handled) {
                             needsRender = true;
                         }
+                    } else if (event.type == SDL_MOUSEBUTTONDOWN) {
+                        // Only handle mouse events if they're NOT from touch emulation
+                        // SDL_TOUCH_MOUSEID indicates the mouse event was generated from touch
+                        if (event.button.which != SDL_TOUCH_MOUSEID) {
+                            bool handled = sdlRenderer->handleClick(event.button.x, event.button.y, currentVNode);
+                            if (handled) {
+                                needsRender = true;
+                            }
+                        }
+                        // If event.button.which == SDL_TOUCH_MOUSEID, ignore it
+                        // because we already handled it via SDL_FINGERDOWN above
                     }
                 }
                 

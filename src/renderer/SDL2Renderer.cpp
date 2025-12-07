@@ -934,15 +934,20 @@ void SDL2Renderer::processEvents(VNode::Ptr root) {
         if (event.type == SDL_QUIT) {
             // Quit event should be handled by the application
             continue;
-        } else if (event.type == SDL_MOUSEBUTTONDOWN) {
-            if (event.button.button == SDL_BUTTON_LEFT) {
-                handleClick(event.button.x, event.button.y, root);
-            }
         } else if (event.type == SDL_FINGERDOWN) {
+            // Handle touch events first
             // Convert touch coordinates to screen coordinates
             int x = static_cast<int>(event.tfinger.x * width_);
             int y = static_cast<int>(event.tfinger.y * height_);
             handleTouch(x, y, root);
+        } else if (event.type == SDL_MOUSEBUTTONDOWN) {
+            // Only handle mouse events if they're NOT from touch emulation
+            // SDL_TOUCH_MOUSEID indicates the mouse event was generated from touch
+            if (event.button.button == SDL_BUTTON_LEFT && event.button.which != SDL_TOUCH_MOUSEID) {
+                handleClick(event.button.x, event.button.y, root);
+            }
+            // If event.button.which == SDL_TOUCH_MOUSEID, ignore it
+            // because we already handled it via SDL_FINGERDOWN above
         }
     }
 }
