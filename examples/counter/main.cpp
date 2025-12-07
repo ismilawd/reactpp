@@ -40,10 +40,8 @@ int main() {
         }
         
         auto component = std::make_shared<Counter>();
-        auto vnode = component->render();
         
         std::cout << "Counter component created" << std::endl;
-        std::cout << vnode->serialize() << std::endl;
         
         bool running = true;
         SDL_Event event;
@@ -52,10 +50,18 @@ int main() {
             while (renderer->pollEvent(event)) {
                 if (event.type == SDL_QUIT) {
                     running = false;
+                } else if (event.type == SDL_MOUSEBUTTONDOWN) {
+                    // Handle button clicks
+                    auto vnode = component->render();
+                    // TODO: Process click events through event system
                 }
             }
             
-            renderer->clear();
+            // Re-render on each frame (in a real app, this would be conditional)
+            auto vnode = component->render();
+            
+            renderer->clear(renderer->rgb(240, 240, 240)); // Light gray background
+            renderer->render(vnode);
             renderer->present();
             
             SDL_Delay(16);

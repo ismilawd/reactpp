@@ -4,6 +4,7 @@
   "description": "ReactPP dependencies",
   "dependencies": [
     "sdl2",
+    "sdl2-ttf",
     "nlohmann-json"
   ]
 }

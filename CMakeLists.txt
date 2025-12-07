@@ -19,6 +19,7 @@ include_directories(${CMAKE_SOURCE_DIR}/include)
 
 # Find dependencies
 find_package(SDL2 REQUIRED)
+find_package(SDL2_ttf REQUIRED)
 find_package(nlohmann_json 3.2.0 REQUIRED)
 
 # Source files
@@ -86,6 +87,7 @@ add_library(reactpp STATIC ${ALL_SOURCES})
 target_link_libraries(reactpp
     PUBLIC
         SDL2::SDL2
+        SDL2_ttf::SDL2_ttf
         nlohmann_json::nlohmann_json
 )
 
