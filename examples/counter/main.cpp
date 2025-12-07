@@ -1,7 +1,10 @@
 #include "reactpp/ReactPP.hpp"
+#include "reactpp/renderer/FramebufferRenderer.hpp"
 #include <iostream>
 #include <memory>
 #include <string>
+#include <unistd.h>
+#include <SDL2/SDL.h>
 
 using namespace reactpp;
 using namespace reactpp::elements;
@@ -28,7 +31,7 @@ public:
                         .x(50)
                         .y(50)
                         .fontSize(32)
-                        .color(SDL2Renderer::rgb(0, 0, 0))
+                        .color(0x000000FF)  // Black color (RGBA format)
                 ),
                 Button(
                     props()
@@ -50,61 +53,113 @@ public:
     }
 };
 
-int main() {
+int main(int argc, char* argv[]) {
     try {
-        auto renderer = std::make_shared<renderer::SDL2Renderer>();
+        // Check for framebuffer mode
+        bool useFramebuffer = false;
+        std::string fbDevice = "/dev/fb0";
         
-        if (!renderer->createWindow("ReactPP Counter Example", 800, 600)) {
-            std::cerr << "Failed to create window" << std::endl;
-            return 1;
+        for (int i = 1; i < argc; i++) {
+            std::string arg = argv[i];
+            if (arg == "--fb" || arg == "--framebuffer") {
+                useFramebuffer = true;
+                if (i + 1 < argc && argv[i + 1][0] != '-') {
+                    fbDevice = argv[++i];
+                }
+            } else if (arg == "--help" || arg == "-h") {
+                std::cout << "Usage: " << argv[0] << " [options]\n"
+                          << "Options:\n"
+                          << "  --fb, --framebuffer [device]  Use framebuffer renderer (default: /dev/fb0)\n"
+                          << "  --help, -h                    Show this help message\n";
+                return 0;
+            }
         }
         
-        auto component = std::make_shared<Counter>();
-        
-        std::cout << "Counter component created" << std::endl;
+        std::shared_ptr<renderer::SDL2Renderer> sdlRenderer;
+        std::shared_ptr<renderer::FramebufferRenderer> fbRenderer;
         
         bool running = true;
         bool needsRender = true;
         VNode::Ptr currentVNode = nullptr;
         
-        while (running) {
-            // Render first to build layout cache
-            if (needsRender || !currentVNode) {
-                currentVNode = component->render();
-                
-                renderer->clear(renderer->rgb(240, 240, 240)); // Light gray background
-                renderer->render(currentVNode);
-                renderer->present();
-                
-                needsRender = false;
+        if (useFramebuffer) {
+            std::cout << "Initializing framebuffer renderer on " << fbDevice << std::endl;
+            fbRenderer = std::make_shared<renderer::FramebufferRenderer>(fbDevice);
+            
+            if (!fbRenderer->createWindow("ReactPP Counter Example", 0, 0)) {
+                std::cerr << "Failed to initialize framebuffer" << std::endl;
+                return 1;
             }
             
-            // Process events (handles both mouse and touch)
-            SDL_Event event;
-            while (renderer->pollEvent(event)) {
-                if (event.type == SDL_QUIT) {
-                    running = false;
-                } else if (event.type == SDL_MOUSEBUTTONDOWN || event.type == SDL_FINGERDOWN) {
-                    // Use the already-rendered VNode tree for hit testing
-                    // (layout cache is still valid from the render call above)
+            auto component = std::make_shared<Counter>();
+            std::cout << "Counter component created (framebuffer mode)" << std::endl;
+            std::cout << "Resolution: " << fbRenderer->getWidth() << "x" << fbRenderer->getHeight() << std::endl;
+            
+            // Framebuffer mode: render once and exit (or implement input handling separately)
+            while (running) {
+                if (needsRender || !currentVNode) {
+                    currentVNode = component->render();
                     
-                    // Handle click/touch
-                    bool handled = false;
-                    if (event.type == SDL_MOUSEBUTTONDOWN) {
-                        handled = renderer->handleClick(event.button.x, event.button.y, currentVNode);
-                    } else if (event.type == SDL_FINGERDOWN) {
-                        int x = static_cast<int>(event.tfinger.x * renderer->getWidth());
-                        int y = static_cast<int>(event.tfinger.y * renderer->getHeight());
-                        handled = renderer->handleTouch(x, y, currentVNode);
-                    }
+                    fbRenderer->clear(fbRenderer->rgb(240, 240, 240));
+                    fbRenderer->render(currentVNode);
+                    fbRenderer->present();
                     
-                    if (handled) {
-                        needsRender = true; // State changed, need to re-render
+                    needsRender = false;
+                    std::cout << "Rendered to framebuffer. Press Ctrl+C to exit." << std::endl;
+                }
+                
+                // In framebuffer mode, we don't have SDL events
+                // You would need to implement input handling via /dev/input or other methods
+                // For now, just render once and wait
+                usleep(100000); // 100ms
+            }
+        } else {
+            std::cout << "Initializing SDL2 renderer" << std::endl;
+            sdlRenderer = std::make_shared<renderer::SDL2Renderer>();
+            
+            if (!sdlRenderer->createWindow("ReactPP Counter Example", 800, 600)) {
+                std::cerr << "Failed to create window" << std::endl;
+                return 1;
+            }
+            
+            auto component = std::make_shared<Counter>();
+            std::cout << "Counter component created" << std::endl;
+            
+            while (running) {
+                // Render first to build layout cache
+                if (needsRender || !currentVNode) {
+                    currentVNode = component->render();
+                    
+                    sdlRenderer->clear(sdlRenderer->rgb(240, 240, 240));
+                    sdlRenderer->render(currentVNode);
+                    sdlRenderer->present();
+                    
+                    needsRender = false;
+                }
+                
+                // Process events (handles both mouse and touch)
+                SDL_Event event;
+                while (sdlRenderer->pollEvent(event)) {
+                    if (event.type == SDL_QUIT) {
+                        running = false;
+                    } else if (event.type == SDL_MOUSEBUTTONDOWN || event.type == SDL_FINGERDOWN) {
+                        bool handled = false;
+                        if (event.type == SDL_MOUSEBUTTONDOWN) {
+                            handled = sdlRenderer->handleClick(event.button.x, event.button.y, currentVNode);
+                        } else if (event.type == SDL_FINGERDOWN) {
+                            int x = static_cast<int>(event.tfinger.x * sdlRenderer->getWidth());
+                            int y = static_cast<int>(event.tfinger.y * sdlRenderer->getHeight());
+                            handled = sdlRenderer->handleTouch(x, y, currentVNode);
+                        }
+                        
+                        if (handled) {
+                            needsRender = true;
+                        }
                     }
                 }
+                
+                SDL_Delay(16);
             }
-            
-            SDL_Delay(16);
         }
         
         return 0;

@@ -65,6 +65,7 @@ set(RENDERER_SOURCES
     src/renderer/StyleResolver.cpp
     src/renderer/RenderTree.cpp
     src/renderer/SDL2Renderer.cpp
+    src/renderer/FramebufferRenderer.cpp
 )
 
 set(PLATFORM_SOURCES
