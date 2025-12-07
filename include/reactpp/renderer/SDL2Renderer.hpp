@@ -86,6 +86,12 @@ public:
     // Clear element layout cache (call before re-rendering)
     void clearLayoutCache();
     
+    // Cursor control
+    void showCursor();
+    void hideCursor();
+    void setHideCursorOnTouch(bool hide);
+    bool isTouchDeviceAvailable() const;
+    
 private:
     SDL_Window* window_;
     SDL_Renderer* renderer_;
@@ -94,6 +100,7 @@ private:
     int height_;
     bool initialized_;
     bool ttfInitialized_;
+    bool hideCursorOnTouch_;
     
     // Element layout tracking for hit testing
     std::unordered_map<uint64_t, Rect> elementLayouts_;

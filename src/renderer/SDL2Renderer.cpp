@@ -15,7 +15,8 @@ namespace renderer {
 
 SDL2Renderer::SDL2Renderer()
     : window_(nullptr), renderer_(nullptr), defaultFont_(nullptr), 
-      width_(0), height_(0), initialized_(false), ttfInitialized_(false) {
+      width_(0), height_(0), initialized_(false), ttfInitialized_(false),
+      hideCursorOnTouch_(true) {
     if (!initializeSDL()) {
         throw std::runtime_error("Failed to initialize SDL2");
     }
@@ -87,6 +88,11 @@ bool SDL2Renderer::createWindow(const std::string& title, int width, int height)
     
     width_ = width;
     height_ = height;
+    
+    // Automatically hide cursor if touch devices are available and flag is set
+    if (hideCursorOnTouch_ && isTouchDeviceAvailable()) {
+        hideCursor();
+    }
     
     return true;
 }
@@ -954,6 +960,29 @@ void SDL2Renderer::processEvents(VNode::Ptr root) {
 
 bool SDL2Renderer::pollEvent(SDL_Event& event) {
     return SDL_PollEvent(&event) != 0;
+}
+
+void SDL2Renderer::showCursor() {
+    SDL_ShowCursor(SDL_ENABLE);
+}
+
+void SDL2Renderer::hideCursor() {
+    SDL_ShowCursor(SDL_DISABLE);
+}
+
+void SDL2Renderer::setHideCursorOnTouch(bool hide) {
+    hideCursorOnTouch_ = hide;
+    if (window_) {  // Only update cursor if window exists
+        if (hide && isTouchDeviceAvailable()) {
+            hideCursor();
+        } else if (!hide) {
+            showCursor();
+        }
+    }
+}
+
+bool SDL2Renderer::isTouchDeviceAvailable() const {
+    return SDL_GetNumTouchDevices() > 0;
 }
 
 } // namespace renderer
