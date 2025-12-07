@@ -1,5 +1,6 @@
 #pragma once
 
+#include "reactpp/renderer/RendererTypes.hpp"
 #include "SDL2Renderer.hpp"
 #include <vector>
 #include <string>

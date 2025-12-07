@@ -1,15 +1,12 @@
 #pragma once
 
 #include "reactpp/core/VNode.hpp"
+#include "reactpp/renderer/RendererTypes.hpp"
 #include <cstdint>
 #include <unordered_map>
 
 namespace reactpp {
 namespace renderer {
-
-struct Rect {
-    int x, y, width, height;
-};
 
 enum class FlexDirection {
     Row,

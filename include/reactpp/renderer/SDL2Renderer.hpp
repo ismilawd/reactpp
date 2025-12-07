@@ -4,6 +4,7 @@
 #include <SDL2/SDL_ttf.h>
 #include "reactpp/core/VNode.hpp"
 #include "reactpp/core/Props.hpp"
+#include "reactpp/renderer/RendererTypes.hpp"
 #include <string>
 #include <memory>
 #include <vector>
@@ -11,25 +12,6 @@
 
 namespace reactpp {
 namespace renderer {
-
-struct Point {
-    int x, y;
-};
-
-struct Rect {
-    int x, y, width, height;
-};
-
-struct GradientStop {
-    float position;  // 0.0 to 1.0
-    uint32_t color;
-};
-
-enum class GradientDirection {
-    Horizontal,
-    Vertical,
-    Radial
-};
 
 class SDL2Renderer {
 public:
