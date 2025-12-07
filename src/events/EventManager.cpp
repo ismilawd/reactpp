@@ -1,6 +1,6 @@
-#include "reactcpp/events/EventManager.hpp"
+#include "reactpp/events/EventManager.hpp"
 
-namespace reactcpp {
+namespace reactpp {
 namespace events {
 
 EventManager::EventManager() {
@@ -38,4 +38,4 @@ void EventManager::cleanupNode(uint64_t nodeId) {
 }
 
 } // namespace events
-} // namespace reactcpp
+} // namespace reactpp

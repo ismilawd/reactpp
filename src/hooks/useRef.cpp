@@ -1,6 +1,6 @@
-#include "reactcpp/hooks/useRef.hpp"
+#include "reactpp/hooks/useRef.hpp"
 
-namespace reactcpp {
+namespace reactpp {
 // useRef implementation - to be implemented
 }
 

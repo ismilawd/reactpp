@@ -1,10 +1,10 @@
-#include "reactcpp/core/VNode.hpp"
-#include "reactcpp/core/Component.hpp"
+#include "reactpp/core/VNode.hpp"
+#include "reactpp/core/Component.hpp"
 #include <sstream>
 #include <queue>
 #include <algorithm>
 
-namespace reactcpp {
+namespace reactpp {
 
 std::atomic<uint64_t> VNode::next_id_{1};
 
@@ -272,5 +272,5 @@ bool VNode::operator!=(const VNode& other) const {
     return !(*this == other);
 }
 
-} // namespace reactcpp
+} // namespace reactpp
 

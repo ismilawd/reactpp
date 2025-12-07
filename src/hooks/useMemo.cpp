@@ -1,6 +1,6 @@
-#include "reactcpp/hooks/useMemo.hpp"
+#include "reactpp/hooks/useMemo.hpp"
 
-namespace reactcpp {
+namespace reactpp {
 // useMemo implementation - to be implemented
 }
 

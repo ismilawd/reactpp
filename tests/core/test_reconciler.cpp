@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
-#include "reactcpp/core/Reconciler.hpp"
+#include "reactpp/core/Reconciler.hpp"
 
-using namespace reactcpp;
+using namespace reactpp;
 
 TEST(ReconcilerTest, Placeholder) {
     Reconciler reconciler;

@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
-#include "reactcpp/renderer/StyleResolver.hpp"
+#include "reactpp/renderer/StyleResolver.hpp"
 
-using namespace reactcpp::renderer;
+using namespace reactpp::renderer;
 
 TEST(StyleResolverTest, Placeholder) {
     StyleResolver resolver;

@@ -1,4 +1,4 @@
-# ReactCPP - React-like GUI Framework in C++
+# ReactPP - React-like GUI Framework in C++
 
 A modern GUI framework in C++ that mimics React's declarative paradigm, component model, and state management patterns.
 
@@ -50,7 +50,7 @@ cd build
 
 ```
 .
-├── include/reactcpp/     # Public headers
+├── include/reactpp/     # Public headers
 │   ├── core/            # Core data structures
 │   ├── hooks/           # Hooks system
 │   ├── elements/        # Primitive UI elements
@@ -65,10 +65,10 @@ cd build
 ## Usage Example
 
 ```cpp
-#include "reactcpp/ReactCPP.hpp"
+#include "reactpp/ReactPP.hpp"
 
-using namespace reactcpp;
-using namespace reactcpp::elements;
+using namespace reactpp;
+using namespace reactpp::elements;
 
 class Counter : public Component {
     VNode::Ptr render() override {

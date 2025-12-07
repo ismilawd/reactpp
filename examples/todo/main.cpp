@@ -1,11 +1,11 @@
-#include "reactcpp/ReactCPP.hpp"
+#include "reactpp/ReactPP.hpp"
 #include <iostream>
 #include <memory>
 #include <vector>
 #include <string>
 
-using namespace reactcpp;
-using namespace reactcpp::elements;
+using namespace reactpp;
+using namespace reactpp::elements;
 
 // Simple todo component (will use hooks when implemented)
 class TodoApp : public Component {
@@ -47,7 +47,7 @@ int main() {
     try {
         auto renderer = std::make_shared<renderer::SDL2Renderer>();
         
-        if (!renderer->createWindow("ReactCPP Todo Example", 800, 600)) {
+        if (!renderer->createWindow("ReactPP Todo Example", 800, 600)) {
             std::cerr << "Failed to create window" << std::endl;
             return 1;
         }

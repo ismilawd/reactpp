@@ -1,6 +1,6 @@
-#include "reactcpp/hooks/useCallback.hpp"
+#include "reactpp/hooks/useCallback.hpp"
 
-namespace reactcpp {
+namespace reactpp {
 // useCallback implementation - to be implemented
 }
 

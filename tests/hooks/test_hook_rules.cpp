@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
-#include "reactcpp/hooks/HookManager.hpp"
+#include "reactpp/hooks/HookManager.hpp"
 
-using namespace reactcpp;
+using namespace reactpp;
 
 TEST(HookManagerTest, Reset) {
     HookManager manager;

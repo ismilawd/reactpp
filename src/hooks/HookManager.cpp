@@ -1,7 +1,7 @@
-#include "reactcpp/hooks/HookManager.hpp"
+#include "reactpp/hooks/HookManager.hpp"
 #include <stdexcept>
 
-namespace reactcpp {
+namespace reactpp {
 
 HookManager::HookManager()
     : currentIndex_(0), dirty_(false), componentId_(0) {
@@ -43,5 +43,5 @@ void HookManager::validateHookCall(size_t expectedIndex) {
     }
 }
 
-} // namespace reactcpp
+} // namespace reactpp
 

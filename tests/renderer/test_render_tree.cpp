@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
-#include "reactcpp/renderer/RenderTree.hpp"
+#include "reactpp/renderer/RenderTree.hpp"
 
-using namespace reactcpp::renderer;
+using namespace reactpp::renderer;
 
 TEST(RenderTreeTest, Placeholder) {
     RenderTree tree;

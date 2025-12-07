@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
-#include "reactcpp/renderer/LayoutEngine.hpp"
+#include "reactpp/renderer/LayoutEngine.hpp"
 
-using namespace reactcpp::renderer;
+using namespace reactpp::renderer;
 
 TEST(LayoutEngineTest, Placeholder) {
     LayoutEngine engine;

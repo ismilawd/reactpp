@@ -1,6 +1,6 @@
-#include "reactcpp/renderer/StyleResolver.hpp"
+#include "reactpp/renderer/StyleResolver.hpp"
 
-namespace reactcpp {
+namespace reactpp {
 namespace renderer {
 
 StyleResolver::StyleResolver() {
@@ -18,4 +18,4 @@ void StyleResolver::computeStyles(VNode::Ptr node) {
 }
 
 } // namespace renderer
-} // namespace reactcpp
+} // namespace reactpp

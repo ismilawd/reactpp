@@ -1,6 +1,6 @@
-#include "reactcpp/platform/Platform.hpp"
+#include "reactpp/platform/Platform.hpp"
 
-namespace reactcpp {
+namespace reactpp {
 namespace platform {
 // Platform abstraction - to be implemented
 }

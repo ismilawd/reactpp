@@ -1,6 +1,6 @@
-#include "reactcpp/core/Reconciler.hpp"
+#include "reactpp/core/Reconciler.hpp"
 
-namespace reactcpp {
+namespace reactpp {
 // Reconciler implementation - to be implemented
 }
 

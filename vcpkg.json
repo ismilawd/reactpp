@@ -1,7 +1,7 @@
 {
-  "name": "reactcpp",
+  "name": "reactpp",
   "version": "1.0.0",
-  "description": "ReactCPP dependencies",
+  "description": "ReactPP dependencies",
   "dependencies": [
     "sdl2",
     "nlohmann-json"

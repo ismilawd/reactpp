@@ -1,6 +1,6 @@
-#include "reactcpp/scheduler/WorkLoop.hpp"
+#include "reactpp/scheduler/WorkLoop.hpp"
 
-namespace reactcpp {
+namespace reactpp {
 
 WorkLoop::WorkLoop(std::shared_ptr<UpdateScheduler> scheduler)
     : scheduler_(scheduler), running_(false), frameStartTime_(0) {
@@ -26,4 +26,4 @@ bool WorkLoop::shouldYield() const {
     return false;
 }
 
-} // namespace reactcpp
+} // namespace reactpp

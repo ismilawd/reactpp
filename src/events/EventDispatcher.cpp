@@ -1,6 +1,6 @@
-#include "reactcpp/events/EventDispatcher.hpp"
+#include "reactpp/events/EventDispatcher.hpp"
 
-namespace reactcpp {
+namespace reactpp {
 namespace events {
 
 EventDispatcher::EventDispatcher() {
@@ -38,4 +38,4 @@ std::vector<VNode::Ptr> EventDispatcher::getEventPath(VNode::Ptr target) {
 }
 
 } // namespace events
-} // namespace reactcpp
+} // namespace reactpp

@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
-#include "reactcpp/context/Context.hpp"
+#include "reactpp/context/Context.hpp"
 
-using namespace reactcpp;
+using namespace reactpp;
 
 TEST(ContextTest, Create) {
     auto context = Context<int>::create(42);

@@ -1,7 +1,7 @@
-#include "reactcpp/core/ComponentInstance.hpp"
+#include "reactpp/core/ComponentInstance.hpp"
 #include <stdexcept>
 
-namespace reactcpp {
+namespace reactpp {
 
 ComponentInstanceManager::ComponentInstanceManager()
     : nextInstanceId_(1) {
@@ -104,5 +104,5 @@ bool ComponentInstanceManager::isMounted(uint64_t componentId) const {
     return it->second.mounted;
 }
 
-} // namespace reactcpp
+} // namespace reactpp
 

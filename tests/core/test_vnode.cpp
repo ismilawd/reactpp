@@ -1,8 +1,8 @@
 #include <gtest/gtest.h>
-#include "reactcpp/core/VNode.hpp"
-#include "reactcpp/core/Props.hpp"
+#include "reactpp/core/VNode.hpp"
+#include "reactpp/core/Props.hpp"
 
-using namespace reactcpp;
+using namespace reactpp;
 
 TEST(VNodeTest, CreateElement) {
     auto node = VNode::createElement("div");

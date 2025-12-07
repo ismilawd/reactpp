@@ -1,6 +1,6 @@
-#include "reactcpp/hooks/useEffect.hpp"
+#include "reactpp/hooks/useEffect.hpp"
 
-namespace reactcpp {
+namespace reactpp {
 // useEffect implementation - to be implemented
 }
 

@@ -1,4 +1,4 @@
- # ReactCPP Framework - Complete Implementation Documentation
+ # ReactPP Framework - Complete Implementation Documentation
 
 ## Document Purpose
 
@@ -126,7 +126,7 @@ This is a comprehensive technical specification for implementing a React-like GU
 - Tree modifications not thread-safe (called from single render thread)
 
 **AI Implementation Task:**
-- Create header file `include/reactcpp/core/VNode.hpp`
+- Create header file `include/reactpp/core/VNode.hpp`
 - Implement all methods in `src/core/VNode.cpp`
 - Write exhaustive unit tests in `tests/core/test_vnode.cpp`
 - Test coverage target: >95%
@@ -160,7 +160,7 @@ This is a comprehensive technical specification for implementing a React-like GU
 - Efficient comparison for reconciliation
 
 **AI Implementation Task:**
-- Create header file `include/reactcpp/core/Props.hpp`
+- Create header file `include/reactpp/core/Props.hpp`
 - Implement in `src/core/Props.cpp`
 - Write comprehensive tests in `tests/core/test_props.cpp`
 - Test coverage target: >98%
@@ -192,7 +192,7 @@ This is a comprehensive technical specification for implementing a React-like GU
 - Hooks only callable during render phase
 
 **AI Implementation Task:**
-- Create header `include/reactcpp/core/Component.hpp`
+- Create header `include/reactpp/core/Component.hpp`
 - Implement base functionality in `src/core/Component.cpp`
 - Write tests in `tests/core/test_component.cpp`
 - Test coverage target: >90%
@@ -223,7 +223,7 @@ This is a comprehensive technical specification for implementing a React-like GU
 - No locking required if single-threaded guarantee maintained
 
 **AI Implementation Task:**
-- Create header `include/reactcpp/core/ComponentInstance.hpp`
+- Create header `include/reactpp/core/ComponentInstance.hpp`
 - Implement in `src/core/ComponentInstance.cpp`
 - Write tests in `tests/core/test_component.cpp`
 - Test coverage target: >90%
@@ -263,7 +263,7 @@ This is a comprehensive technical specification for implementing a React-like GU
 3. Commit phase (apply effects to real DOM)
 
 **AI Implementation Task:**
-- Create header `include/reactcpp/core/FiberNode.hpp`
+- Create header `include/reactpp/core/FiberNode.hpp`
 - Implement in `src/core/FiberNode.cpp`
 - Write tests in `tests/core/test_fiber.cpp`
 - Test coverage target: >85%
@@ -299,7 +299,7 @@ This is a comprehensive technical specification for implementing a React-like GU
 - Dirty flag for re-render triggering
 
 **AI Implementation Task:**
-- Create header `include/reactcpp/hooks/HookManager.hpp`
+- Create header `include/reactpp/hooks/HookManager.hpp`
 - Implement in `src/hooks/HookManager.cpp`
 - Write tests in `tests/hooks/test_hook_rules.cpp`
 - Test coverage target: >95%
@@ -329,7 +329,7 @@ This is a comprehensive technical specification for implementing a React-like GU
 - Functional updates applied during commit
 
 **AI Implementation Task:**
-- Create header `include/reactcpp/hooks/useState.hpp`
+- Create header `include/reactpp/hooks/useState.hpp`
 - Implement in `src/hooks/useState.cpp`
 - Write tests in `tests/hooks/test_useState.cpp`
 - Test coverage target: >95%
@@ -365,7 +365,7 @@ This is a comprehensive technical specification for implementing a React-like GU
 - Store cleanup function for next render
 
 **AI Implementation Task:**
-- Create header `include/reactcpp/hooks/useEffect.hpp`
+- Create header `include/reactpp/hooks/useEffect.hpp`
 - Implement in `src/hooks/useEffect.cpp`
 - Write tests in `tests/hooks/test_useEffect.cpp`
 - Test coverage target: >95%
@@ -393,7 +393,7 @@ This is a comprehensive technical specification for implementing a React-like GU
 - No comparison or update logic needed
 
 **AI Implementation Task:**
-- Create header `include/reactcpp/hooks/useRef.hpp`
+- Create header `include/reactpp/hooks/useRef.hpp`
 - Implement in `src/hooks/useRef.cpp`
 - Write tests in `tests/hooks/test_useRef.cpp`
 - Test coverage target: >90%
@@ -427,7 +427,7 @@ This is a comprehensive technical specification for implementing a React-like GU
 - Document when to use vs when overhead not worth it
 
 **AI Implementation Task:**
-- Create header `include/reactcpp/hooks/useMemo.hpp`
+- Create header `include/reactpp/hooks/useMemo.hpp`
 - Implement in `src/hooks/useMemo.cpp`
 - Write tests in `tests/hooks/test_useMemo.cpp`
 - Test coverage target: >90%
@@ -454,7 +454,7 @@ This is a comprehensive technical specification for implementing a React-like GU
 - Return cached function reference
 
 **AI Implementation Task:**
-- Create header `include/reactcpp/hooks/useCallback.hpp`
+- Create header `include/reactpp/hooks/useCallback.hpp`
 - Implement in `src/hooks/useCallback.cpp`
 - Write tests in `tests/hooks/test_useCallback.cpp`
 - Test coverage target: >90%
@@ -488,7 +488,7 @@ This is a comprehensive technical specification for implementing a React-like GU
 - Reducer called in render phase with queued actions
 
 **AI Implementation Task:**
-- Create header `include/reactcpp/hooks/useReducer.hpp`
+- Create header `include/reactpp/hooks/useReducer.hpp`
 - Implement in `src/hooks/useReducer.cpp`
 - Write tests in `tests/hooks/test_useReducer.cpp`
 - Test coverage target: >95%
@@ -517,7 +517,7 @@ This is a comprehensive technical specification for implementing a React-like GU
 - Context change triggers re-render of consumers
 
 **AI Implementation Task:**
-- Create header `include/reactcpp/hooks/useContext.hpp`
+- Create header `include/reactpp/hooks/useContext.hpp`
 - Implement in `src/hooks/useContext.cpp`
 - Write tests in `tests/context/test_context.cpp`
 - Test coverage target: >90%
@@ -546,7 +546,7 @@ This is a comprehensive technical specification for implementing a React-like GU
 - Type-safe value storage
 
 **AI Implementation Task:**
-- Create header `include/reactcpp/context/Context.hpp`
+- Create header `include/reactpp/context/Context.hpp`
 - Implement in `src/context/ContextManager.cpp`
 - Write tests in `tests/context/test_context.cpp`
 - Test coverage target: >90%
@@ -575,7 +575,7 @@ This is a comprehensive technical specification for implementing a React-like GU
 - Support nested providers (closer provider wins)
 
 **AI Implementation Task:**
-- Create header `include/reactcpp/context/ContextProvider.hpp`
+- Create header `include/reactpp/context/ContextProvider.hpp`
 - Implement in `src/context/ContextProvider.cpp`
 - Write tests in `tests/context/test_context.cpp`
 - Test coverage target: >90%
@@ -603,7 +603,7 @@ This is a comprehensive technical specification for implementing a React-like GU
 - No locking required
 
 **AI Implementation Task:**
-- Create header `include/reactcpp/context/ContextManager.hpp`
+- Create header `include/reactpp/context/ContextManager.hpp`
 - Implement in `src/context/ContextManager.cpp`
 - Write tests in `tests/context/test_context.cpp`
 - Test coverage target: >85%
@@ -663,7 +663,7 @@ This is a comprehensive technical specification for implementing a React-like GU
 - Effect hooks to run
 
 **AI Implementation Task:**
-- Create header `include/reactcpp/core/Reconciler.hpp`
+- Create header `include/reactpp/core/Reconciler.hpp`
 - Implement in `src/core/Reconciler.cpp`
 - Write tests in `tests/core/test_reconciler.cpp`
 - Test coverage target: >85%
@@ -744,7 +744,7 @@ This is a comprehensive technical specification for implementing a React-like GU
 4. Returned to pool (unless persist() called)
 
 **AI Implementation Task:**
-- Create header `include/reactcpp/events/SyntheticEvent.hpp`
+- Create header `include/reactpp/events/SyntheticEvent.hpp`
 - Implement in `src/events/SyntheticEvent.cpp`
 - Write tests in `tests/events/test_synthetic_events.cpp`
 - Test coverage target: >90%
@@ -773,7 +773,7 @@ This is a comprehensive technical specification for implementing a React-like GU
 - Efficient for large component trees
 
 **AI Implementation Task:**
-- Create header `include/reactcpp/events/EventDispatcher.hpp`
+- Create header `include/reactpp/events/EventDispatcher.hpp`
 - Implement in `src/events/EventDispatcher.cpp`
 - Write tests in `tests/events/test_event_dispatcher.cpp`
 - Test coverage target: >85%
@@ -798,7 +798,7 @@ This is a comprehensive technical specification for implementing a React-like GU
 - Handle handler updates (old removed, new added)
 
 **AI Implementation Task:**
-- Create header `include/reactcpp/events/EventManager.hpp`
+- Create header `include/reactpp/events/EventManager.hpp`
 - Implement in `src/events/EventManager.cpp`
 - Write tests in `tests/events/test_event_manager.cpp`
 - Test coverage target: >85%
@@ -832,7 +832,7 @@ This is a comprehensive technical specification for implementing a React-like GU
 - Controlled flushing for testing
 
 **AI Implementation Task:**
-- Create header `include/reactcpp/scheduler/UpdateScheduler.hpp`
+- Create header `include/reactpp/scheduler/UpdateScheduler.hpp`
 - Implement in `src/scheduler/UpdateScheduler.cpp`
 - Write tests in `tests/scheduler/test_scheduler.cpp`
 - Test coverage target: >80%
@@ -894,7 +894,7 @@ This is a comprehensive technical specification for implementing a React-like GU
 - Nested flex containers
 
 **AI Implementation Task:**
-- Create header `include/reactcpp/renderer/LayoutEngine.hpp`
+- Create header `include/reactpp/renderer/LayoutEngine.hpp`
 - Implement in `src/renderer/LayoutEngine.cpp`
 - Write tests in `tests/renderer/test_layout.cpp`
 - Test coverage target: >85%
@@ -919,7 +919,7 @@ This is a comprehensive technical specification for implementing a React-like GU
 - Cache computed styles per node
 
 **AI Implementation Task:**
-- Create header `include/reactcpp/renderer/StyleResolver.hpp`
+- Create header `include/reactpp/renderer/StyleResolver.hpp`
 - Implement in `src/renderer/StyleResolver.cpp`
 - Write tests in `tests/renderer/test_style_resolver.cpp`
 - Test coverage target: >80%
@@ -947,7 +947,7 @@ This is a comprehensive technical specification for implementing a React-like GU
 6. Paint during next frame
 
 **AI Implementation Task:**
-- Create header `include/reactcpp/renderer/RenderTree.hpp`
+- Create header `include/reactpp/renderer/RenderTree.hpp`
 - Implement in `src/renderer/RenderTree.cpp`
 - Write tests in `tests/renderer/test_render_tree.cpp`
 - Test coverage target: >80%
@@ -987,7 +987,7 @@ This is a comprehensive technical specification for implementing a React-like GU
 - Translate to synthetic events
 
 **AI Implementation Task:**
-- Create headers in `include/reactcpp/platform/linux/`
+- Create headers in `include/reactpp/platform/linux/`
 - Implement in `src/platform/linux/DRMBackend.cpp` and related files
 - Write tests in `tests/platform/test_drm.cpp`
 - Test coverage target: >70% (hardware-dependent)
@@ -1008,7 +1008,7 @@ This is a comprehensive technical specification for implementing a React-like GU
 - DPI awareness
 
 **AI Implementation Task:**
-- Create header `include/reactcpp/platform/linux/X11Backend.hpp`
+- Create header `include/reactpp/platform/linux/X11Backend.hpp`
 - Implement in `src/platform/linux/X11Backend.cpp`
 - Write tests focusing on window management
 - Create example application
@@ -1027,5 +1027,5 @@ This is a comprehensive technical specification for implementing a React-like GU
 - HiDPI support
 
 **AI Implementation Task:**
-- Create header `include/reactcpp/platform/linux/WaylandBackend.hpp`
+- Create header `include/reactpp/platform/linux/WaylandBackend.hpp`
 - Implement in `src/platform/linux/WaylandBackend.cpp`

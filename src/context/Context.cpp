@@ -1,6 +1,6 @@
-#include "reactcpp/context/Context.hpp"
+#include "reactpp/context/Context.hpp"
 
-namespace reactcpp {
+namespace reactpp {
 // Context implementation - to be implemented
 }
 

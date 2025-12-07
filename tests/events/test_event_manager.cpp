@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
-#include "reactcpp/events/EventManager.hpp"
+#include "reactpp/events/EventManager.hpp"
 
-using namespace reactcpp::events;
+using namespace reactpp::events;
 
 TEST(EventManagerTest, Placeholder) {
     EventManager manager;

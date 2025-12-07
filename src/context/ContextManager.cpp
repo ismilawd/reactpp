@@ -1,7 +1,7 @@
-#include "reactcpp/context/ContextManager.hpp"
+#include "reactpp/context/ContextManager.hpp"
 #include <algorithm>
 
-namespace reactcpp {
+namespace reactpp {
 
 ContextManager::ContextManager() {
 }
@@ -43,4 +43,4 @@ void ContextManager::notifyConsumers(uint64_t providerId) {
     (void)providerId;
 }
 
-} // namespace reactcpp
+} // namespace reactpp

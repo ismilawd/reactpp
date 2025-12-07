@@ -1,6 +1,6 @@
-#include "reactcpp/context/ContextProvider.hpp"
+#include "reactpp/context/ContextProvider.hpp"
 
-namespace reactcpp {
+namespace reactpp {
 // ContextProvider implementation - to be implemented
 }
 

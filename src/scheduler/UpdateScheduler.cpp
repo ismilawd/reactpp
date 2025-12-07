@@ -1,6 +1,6 @@
-#include "reactcpp/scheduler/UpdateScheduler.hpp"
+#include "reactpp/scheduler/UpdateScheduler.hpp"
 
-namespace reactcpp {
+namespace reactpp {
 
 UpdateScheduler::UpdateScheduler() : batching_(false) {
 }
@@ -35,4 +35,4 @@ void UpdateScheduler::flushBatchedUpdates() {
     batchedUpdates_.clear();
 }
 
-} // namespace reactcpp
+} // namespace reactpp

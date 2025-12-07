@@ -1,9 +1,9 @@
 #include <gtest/gtest.h>
-#include "reactcpp/core/Component.hpp"
-#include "reactcpp/core/VNode.hpp"
-#include "reactcpp/core/Props.hpp"
+#include "reactpp/core/Component.hpp"
+#include "reactpp/core/VNode.hpp"
+#include "reactpp/core/Props.hpp"
 
-using namespace reactcpp;
+using namespace reactpp;
 
 class TestComponent : public Component {
 public:

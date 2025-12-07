@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
-#include "reactcpp/events/SyntheticEvent.hpp"
+#include "reactpp/events/SyntheticEvent.hpp"
 
-using namespace reactcpp::events;
+using namespace reactpp::events;
 
 TEST(SyntheticEventTest, Create) {
     SyntheticEvent event("click");

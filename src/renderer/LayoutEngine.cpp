@@ -1,6 +1,6 @@
-#include "reactcpp/renderer/LayoutEngine.hpp"
+#include "reactpp/renderer/LayoutEngine.hpp"
 
-namespace reactcpp {
+namespace reactpp {
 namespace renderer {
 
 LayoutEngine::LayoutEngine() {
@@ -29,4 +29,4 @@ void LayoutEngine::layoutNode(VNode::Ptr node, int availableWidth, int available
 }
 
 } // namespace renderer
-} // namespace reactcpp
+} // namespace reactpp

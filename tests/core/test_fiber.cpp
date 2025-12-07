@@ -1,8 +1,8 @@
 #include <gtest/gtest.h>
-#include "reactcpp/core/FiberNode.hpp"
-#include "reactcpp/core/VNode.hpp"
+#include "reactpp/core/FiberNode.hpp"
+#include "reactpp/core/VNode.hpp"
 
-using namespace reactcpp;
+using namespace reactpp;
 
 TEST(FiberNodeTest, Create) {
     auto vnode = VNode::createElement("div");

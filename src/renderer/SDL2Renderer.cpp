@@ -1,7 +1,7 @@
-#include "reactcpp/renderer/SDL2Renderer.hpp"
+#include "reactpp/renderer/SDL2Renderer.hpp"
 #include <stdexcept>
 
-namespace reactcpp {
+namespace reactpp {
 namespace renderer {
 
 SDL2Renderer::SDL2Renderer()
@@ -141,5 +141,5 @@ bool SDL2Renderer::pollEvent(SDL_Event& event) {
 }
 
 } // namespace renderer
-} // namespace reactcpp
+} // namespace reactpp
 

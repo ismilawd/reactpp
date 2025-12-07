@@ -1,6 +1,6 @@
-#include "reactcpp/events/SyntheticEvent.hpp"
+#include "reactpp/events/SyntheticEvent.hpp"
 
-namespace reactcpp {
+namespace reactpp {
 namespace events {
 
 SyntheticEvent::SyntheticEvent(const std::string& eventType)
@@ -22,4 +22,4 @@ void SyntheticEvent::persist() {
 }
 
 } // namespace events
-} // namespace reactcpp
+} // namespace reactpp

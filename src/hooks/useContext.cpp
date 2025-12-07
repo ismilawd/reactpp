@@ -1,6 +1,6 @@
-#include "reactcpp/hooks/useContext.hpp"
+#include "reactpp/hooks/useContext.hpp"
 
-namespace reactcpp {
+namespace reactpp {
 // useContext implementation - to be implemented
 }
 

@@ -1,6 +1,6 @@
-# Install dependencies for ReactCPP on Windows using vcpkg
+# Install dependencies for ReactPP on Windows using vcpkg
 
-Write-Host "Installing dependencies for ReactCPP..." -ForegroundColor Green
+Write-Host "Installing dependencies for ReactPP..." -ForegroundColor Green
 
 # Check if vcpkg is already installed
 $vcpkgPath = "$env:USERPROFILE\vcpkg"

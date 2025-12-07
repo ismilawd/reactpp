@@ -1,6 +1,6 @@
-#include "reactcpp/hooks/useReducer.hpp"
+#include "reactpp/hooks/useReducer.hpp"
 
-namespace reactcpp {
+namespace reactpp {
 // useReducer implementation - to be implemented
 }
 

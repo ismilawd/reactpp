@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
-#include "reactcpp/scheduler/UpdateScheduler.hpp"
+#include "reactpp/scheduler/UpdateScheduler.hpp"
 
-using namespace reactcpp;
+using namespace reactpp;
 
 TEST(UpdateSchedulerTest, Placeholder) {
     auto scheduler = std::make_shared<UpdateScheduler>();

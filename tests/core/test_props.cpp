@@ -1,9 +1,9 @@
 #include <gtest/gtest.h>
-#include "reactcpp/core/Props.hpp"
+#include "reactpp/core/Props.hpp"
 #include <string>
 #include <functional>
 
-using namespace reactcpp;
+using namespace reactpp;
 
 TEST(PropsTest, SetAndGet) {
     Props props;

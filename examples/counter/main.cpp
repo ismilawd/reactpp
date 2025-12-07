@@ -1,10 +1,10 @@
-#include "reactcpp/ReactCPP.hpp"
+#include "reactpp/ReactPP.hpp"
 #include <iostream>
 #include <memory>
 #include <string>
 
-using namespace reactcpp;
-using namespace reactcpp::elements;
+using namespace reactpp;
+using namespace reactpp::elements;
 
 // Counter component (will use hooks when implemented)
 class Counter : public Component {
@@ -34,7 +34,7 @@ int main() {
     try {
         auto renderer = std::make_shared<renderer::SDL2Renderer>();
         
-        if (!renderer->createWindow("ReactCPP Counter Example", 800, 600)) {
+        if (!renderer->createWindow("ReactPP Counter Example", 800, 600)) {
             std::cerr << "Failed to create window" << std::endl;
             return 1;
         }

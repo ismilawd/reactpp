@@ -1,14 +1,14 @@
-# ReactCPP Framework - Project Memory
+# ReactPP Framework - Project Memory
 
 ## Project Overview
-ReactCPP is a React-like GUI framework implemented in C++17, following the specifications in `docs/Impl.MD` and `docs/README.MD`. The project uses CMake for building and targets multiple platforms (Linux/DRM, Windows, macOS).
+ReactPP is a React-like GUI framework implemented in C++17, following the specifications in `docs/Impl.MD` and `docs/README.MD`. The project uses CMake for building and targets multiple platforms (Linux/DRM, Windows, macOS).
 
 ## Current Implementation Status
 
 ### ✅ Fully Implemented Components
 
 #### Core Data Structures
-- **VNode** (`include/reactcpp/core/VNode.hpp`): Complete implementation
+- **VNode** (`include/reactpp/core/VNode.hpp`): Complete implementation
   - Factory methods: createElement, createText, createComponent, createFragment
   - Tree operations: appendChild, removeChild, replaceChild, insertBefore
   - Traversal: traversePreOrder, traversePostOrder, traverseLevelOrder
@@ -18,7 +18,7 @@ ReactCPP is a React-like GUI framework implemented in C++17, following the speci
   - Thread-safe ID generation using atomic
   - Inherits from std::enable_shared_from_this for proper shared_ptr management
 
-- **Props** (`include/reactcpp/core/Props.hpp`): Complete implementation
+- **Props** (`include/reactpp/core/Props.hpp`): Complete implementation
   - Type-safe property storage using std::any
   - Type tracking with std::type_index
   - Methods: set, get, tryGet, has, remove, merge
@@ -26,7 +26,7 @@ ReactCPP is a React-like GUI framework implemented in C++17, following the speci
   - Iterator support
   - Exception handling for type mismatches
 
-- **Component** (`include/reactcpp/core/Component.hpp`): Complete implementation
+- **Component** (`include/reactpp/core/Component.hpp`): Complete implementation
   - Pure virtual render() method
   - Lifecycle methods: onCreate, onMount, onUpdate, onUnmount
   - Props storage and access
@@ -34,13 +34,13 @@ ReactCPP is a React-like GUI framework implemented in C++17, following the speci
   - Component ID generation (thread-safe)
   - Display name for debugging
 
-- **ComponentInstance** (`include/reactcpp/core/ComponentInstance.hpp`): Complete implementation
+- **ComponentInstance** (`include/reactpp/core/ComponentInstance.hpp`): Complete implementation
   - Instance creation and destruction
   - Lifecycle management (mount/unmount)
   - Hook manager association
   - Props updates
 
-- **FiberNode** (`include/reactcpp/core/FiberNode.hpp`): Complete structure
+- **FiberNode** (`include/reactpp/core/FiberNode.hpp`): Complete structure
   - Fiber tree structure (return_, child, sibling, alternate)
   - Effect tags (Placement, Update, Deletion)
   - Priority levels
@@ -48,14 +48,14 @@ ReactCPP is a React-like GUI framework implemented in C++17, following the speci
   - Inherits from std::enable_shared_from_this
 
 #### Hooks Infrastructure
-- **HookManager** (`include/reactcpp/hooks/HookManager.hpp`): Complete implementation
+- **HookManager** (`include/reactpp/hooks/HookManager.hpp`): Complete implementation
   - Hook state storage per component
   - Index tracking for hook call order
   - Validation for hook rules
   - Dirty flag for re-render triggering
 
 #### Rendering
-- **SDL2Renderer** (`include/reactcpp/renderer/SDL2Renderer.hpp`): Complete implementation
+- **SDL2Renderer** (`include/reactpp/renderer/SDL2Renderer.hpp`): Complete implementation
   - Window creation and management
   - Drawing primitives: drawRect, fillRect
   - Color utilities: rgba, rgb
@@ -63,7 +63,7 @@ ReactCPP is a React-like GUI framework implemented in C++17, following the speci
   - Proper cleanup and RAII
 
 #### UI Elements
-- **View, Text, Button, Input** (`include/reactcpp/elements/`): Factory functions implemented
+- **View, Text, Button, Input** (`include/reactpp/elements/`): Factory functions implemented
   - Convenience functions for common use cases
   - Props integration
 
@@ -100,8 +100,8 @@ ReactCPP is a React-like GUI framework implemented in C++17, following the speci
 ```
 .
 ├── CMakeLists.txt              # Main CMake configuration
-├── include/reactcpp/           # Public headers
-│   ├── ReactCPP.hpp           # Main include file
+├── include/reactpp/           # Public headers
+│   ├── ReactPP.hpp           # Main include file
 │   ├── core/                  # Core data structures
 │   │   ├── VNode.hpp          ✅ Complete
 │   │   ├── Props.hpp          ✅ Complete
@@ -220,14 +220,14 @@ Based on `docs/Impl.MD` roadmap:
 
 ## Code Style Notes
 
-- Namespace: `reactcpp` for main namespace, nested namespaces for modules
+- Namespace: `reactpp` for main namespace, nested namespaces for modules
 - Naming: PascalCase for classes, camelCase for methods, UPPER_CASE for constants
 - Smart pointers: Prefer shared_ptr for shared ownership, unique_ptr for exclusive
 - RAII: All resources properly managed with constructors/destructors
 
 ## File Organization
 
-- Headers in `include/reactcpp/` mirror namespace structure
+- Headers in `include/reactpp/` mirror namespace structure
 - Implementation in `src/` mirrors header structure
 - Tests in `tests/` mirror source structure
 - Examples in `examples/` with descriptive names

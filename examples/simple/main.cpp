@@ -1,9 +1,9 @@
-#include "reactcpp/ReactCPP.hpp"
+#include "reactpp/ReactPP.hpp"
 #include <iostream>
 #include <memory>
 
-using namespace reactcpp;
-using namespace reactcpp::elements;
+using namespace reactpp;
+using namespace reactpp::elements;
 
 // Simple component example
 class HelloWorld : public Component {
@@ -11,7 +11,7 @@ public:
     VNode::Ptr render() override {
         return View({}, {
             Text("Hello, World!"),
-            Text("This is a ReactCPP example")
+            Text("This is a ReactPP example")
         });
     }
 };
@@ -21,7 +21,7 @@ int main() {
         // Create renderer
         auto renderer = std::make_shared<renderer::SDL2Renderer>();
         
-        if (!renderer->createWindow("ReactCPP Simple Example", 800, 600)) {
+        if (!renderer->createWindow("ReactPP Simple Example", 800, 600)) {
             std::cerr << "Failed to create window" << std::endl;
             return 1;
         }

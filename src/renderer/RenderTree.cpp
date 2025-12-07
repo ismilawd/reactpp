@@ -1,6 +1,6 @@
-#include "reactcpp/renderer/RenderTree.hpp"
+#include "reactpp/renderer/RenderTree.hpp"
 
-namespace reactcpp {
+namespace reactpp {
 namespace renderer {
 
 RenderTreeNode::RenderTreeNode(VNode::Ptr vnode)
@@ -32,4 +32,4 @@ std::shared_ptr<RenderTreeNode> RenderTree::getNode(uint64_t nodeId) const {
 }
 
 } // namespace renderer
-} // namespace reactcpp
+} // namespace reactpp

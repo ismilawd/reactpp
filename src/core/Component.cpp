@@ -1,6 +1,6 @@
-#include "reactcpp/core/Component.hpp"
+#include "reactpp/core/Component.hpp"
 
-namespace reactcpp {
+namespace reactpp {
 
 std::atomic<uint64_t> Component::next_id_{1};
 
@@ -9,5 +9,5 @@ Component::Component()
       displayName_("Component") {
 }
 
-} // namespace reactcpp
+} // namespace reactpp
 

@@ -1,6 +1,6 @@
-#include "reactcpp/core/FiberNode.hpp"
+#include "reactpp/core/FiberNode.hpp"
 
-namespace reactcpp {
+namespace reactpp {
 
 FiberNode::FiberNode()
     : type(VNodeType::Element),
@@ -57,5 +57,5 @@ void FiberNode::addToEffectList(Ptr fiber) {
     }
 }
 
-} // namespace reactcpp
+} // namespace reactpp
 
