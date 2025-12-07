@@ -1,9 +1,11 @@
 #include "reactpp/ReactPP.hpp"
+#ifdef __linux__
 #include "reactpp/renderer/FramebufferRenderer.hpp"
+#include <unistd.h>
+#endif
 #include <iostream>
 #include <memory>
 #include <string>
-#include <unistd.h>
 #include <SDL2/SDL.h>
 
 using namespace reactpp;
@@ -55,33 +57,43 @@ public:
 
 int main(int argc, char* argv[]) {
     try {
-        // Check for framebuffer mode
+        // Check for framebuffer mode (Linux only)
         bool useFramebuffer = false;
         std::string fbDevice = "/dev/fb0";
         
         for (int i = 1; i < argc; i++) {
             std::string arg = argv[i];
             if (arg == "--fb" || arg == "--framebuffer") {
+#ifdef __linux__
                 useFramebuffer = true;
                 if (i + 1 < argc && argv[i + 1][0] != '-') {
                     fbDevice = argv[++i];
                 }
+#else
+                std::cerr << "Error: Framebuffer mode is only available on Linux" << std::endl;
+                return 1;
+#endif
             } else if (arg == "--help" || arg == "-h") {
                 std::cout << "Usage: " << argv[0] << " [options]\n"
                           << "Options:\n"
-                          << "  --fb, --framebuffer [device]  Use framebuffer renderer (default: /dev/fb0)\n"
+#ifdef __linux__
+                          << "  --fb, --framebuffer [device]  Use framebuffer renderer (Linux only, default: /dev/fb0)\n"
+#endif
                           << "  --help, -h                    Show this help message\n";
                 return 0;
             }
         }
         
         std::shared_ptr<renderer::SDL2Renderer> sdlRenderer;
+#ifdef __linux__
         std::shared_ptr<renderer::FramebufferRenderer> fbRenderer;
+#endif
         
         bool running = true;
         bool needsRender = true;
         VNode::Ptr currentVNode = nullptr;
         
+#ifdef __linux__
         if (useFramebuffer) {
             std::cout << "Initializing framebuffer renderer on " << fbDevice << std::endl;
             fbRenderer = std::make_shared<renderer::FramebufferRenderer>(fbDevice);
@@ -113,7 +125,9 @@ int main(int argc, char* argv[]) {
                 // For now, just render once and wait
                 usleep(100000); // 100ms
             }
-        } else {
+        } else
+#endif // __linux__
+        {
             std::cout << "Initializing SDL2 renderer" << std::endl;
             sdlRenderer = std::make_shared<renderer::SDL2Renderer>();
             

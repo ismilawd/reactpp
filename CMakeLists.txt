@@ -65,8 +65,12 @@ set(RENDERER_SOURCES
     src/renderer/StyleResolver.cpp
     src/renderer/RenderTree.cpp
     src/renderer/SDL2Renderer.cpp
-    src/renderer/FramebufferRenderer.cpp
 )
+
+# Framebuffer renderer only on Linux
+if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+    list(APPEND RENDERER_SOURCES src/renderer/FramebufferRenderer.cpp)
+endif()
 
 set(PLATFORM_SOURCES
     src/platform/Platform.cpp

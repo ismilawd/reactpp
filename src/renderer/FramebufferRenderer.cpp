@@ -1,3 +1,5 @@
+#ifdef __linux__
+
 #include "reactpp/renderer/FramebufferRenderer.hpp"
 #include "reactpp/core/Props.hpp"
 #include "reactpp/elements/Elements.hpp"
@@ -914,4 +916,6 @@ bool FramebufferRenderer::handleTouch(int x, int y, VNode::Ptr root) {
 
 } // namespace renderer
 } // namespace reactpp
+
+#endif // __linux__
 

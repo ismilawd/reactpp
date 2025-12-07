@@ -1,5 +1,6 @@
 #pragma once
 
+#ifdef __linux__
 #include "reactpp/core/VNode.hpp"
 #include "reactpp/core/Props.hpp"
 #include <string>
@@ -135,4 +136,6 @@ private:
 
 } // namespace renderer
 } // namespace reactpp
+
+#endif // __linux__
 
