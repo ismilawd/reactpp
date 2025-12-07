@@ -16,7 +16,7 @@ public:
     template<typename T>
     void set(const std::string& key, const T& value) {
         props_[key] = value;
-        types_[key] = std::type_index(typeid(T));
+        types_.insert_or_assign(key, std::type_index(typeid(T)));
     }
     
     // Get a property (throws on type mismatch)
@@ -83,7 +83,7 @@ public:
     void merge(const Props& other) {
         for (const auto& [key, value] : other.props_) {
             props_[key] = value;
-            types_[key] = other.types_.at(key);
+            types_.insert({key, other.types_.at(key)});
         }
     }
     

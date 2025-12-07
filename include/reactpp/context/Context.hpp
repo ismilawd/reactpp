@@ -34,7 +34,7 @@ Context<T>::Context(const T& defaultValue)
 
 template<typename T>
 typename Context<T>::Ptr Context<T>::create(const T& defaultValue) {
-    return std::make_shared<Context<T>>(defaultValue);
+    return std::shared_ptr<Context<T>>(new Context<T>(defaultValue));
 }
 
 } // namespace reactpp

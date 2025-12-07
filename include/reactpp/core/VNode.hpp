@@ -84,8 +84,10 @@ public:
     bool operator==(const VNode& other) const;
     bool operator!=(const VNode& other) const;
     
-private:
+    // Constructor (public to allow std::make_shared, but factory methods are preferred)
     VNode(VNodeType type);
+    
+private:
     
     static std::atomic<uint64_t> next_id_;
     
